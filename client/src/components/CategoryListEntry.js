@@ -13,19 +13,18 @@ const CategoryListEntry = (props) => {
   return (
     <View style={styles.listEntryContainer}>
       <View style={styles.listEntryRow}>
-        <View style={styles.label}>
-          <Text style={styles.quantity}>{props.foodItem.quantity}</Text>
+        <View style={{...styles.label, ...styles.quantityView}}>
+          <Text style={{...styles.quantity, ...styles.text}}>{props.foodItem.quantity}</Text>
         </View>
-        <View style={styles.label}>
-          <Text style={styles.name}>{props.foodItem.name}</Text>
+        <View style={{...styles.label, ...styles.nameView}}>
+          <Text style={{...styles.name, ...styles.text}}>{props.foodItem.name}</Text>
         </View>
-        <View style={styles.label}>
-          <Text style={styles.date} >{props.foodItem.createdAt.split('T')[0]}</Text>
+        <View style={{...styles.label, ...styles.dateView}}>
+          <Text style={{...styles.date, ...styles.text}} >{props.foodItem.createdAt.split('T')[0]}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            title='-' 
-            style={styles.subtract}
+          <TouchableOpacity 
+            style={styles.button}
             onPress={props.edit.bind(
               null, 
               {
@@ -35,10 +34,16 @@ const CategoryListEntry = (props) => {
               },
               props.foodItem.id
             )}
-          />
+          >
+            <View>
+              <Image
+                style={styles.image}
+                source={require('../images/subtract.png')}
+              />
+            </View>
+          </TouchableOpacity>
           <TouchableOpacity
-            title='+' 
-            style={styles.add} 
+            style={styles.button} 
             onPress={props.edit.bind(
               null, 
               {
@@ -47,12 +52,26 @@ const CategoryListEntry = (props) => {
                 type: props.foodItem.type
               },
               props.foodItem.id
-            )}/>
+            )}
+          >
+            <View>
+              <Image
+                style={styles.image}
+                source={require('../images/add.png')}
+              />
+            </View>
+          </TouchableOpacity>
           <TouchableOpacity
-            title='x'
-            style={styles.delete} 
+            style={styles.button} 
             onPress={props.delete.bind(null, props.foodItem.id)}
-          /> 
+          >
+            <View>
+              <Image
+                style={styles.image}
+                source={require('../images/trash.png')}
+              />
+            </View>
+          </TouchableOpacity> 
         </View>
       </View>
     </View>
@@ -61,46 +80,57 @@ const CategoryListEntry = (props) => {
 
 const styles = {
   listEntryContainer: {
-    height: 30,
-    backgroundColor: 'steelblue'
+    height: 50,
+    paddingLeft: 5,
+    paddingRight: 5,
+    marginTop: 30
   },
   listEntryRow: {
     flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'pink',
+    flexDirection: 'row'
   },
   label: {
-    flex: 1,
     alignContent: 'center', 
     justifyContent: 'center',
   },
+  quantityView: {
+    flex: 1
+  },
+  nameView: {
+    flex: 4
+  },
+  dateView: {
+    flex: 4
+  },
   quantity: {
-    alignSelf: 'center',
-    backgroundColor: 'powderblue'
+    alignSelf: 'center'
   },
   name: {
-    alignSelf: 'center',
-    backgroundColor: 'aquamarine'
+    alignSelf: 'center'
   },
   date: {
     alignSelf: 'center',
   },
   buttonContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'steelblue'
+    flex: 5,
+    flexDirection: 'row'
   },
-  add: {
+  button: {
     flex: 1,
-    backgroundColor: 'darkseagreen'
+    justifyContent: 'center'
   },
-  subtract: {
-    flex: 1,
-    backgroundColor: 'lavender'
+  buttonText: {
+    alignSelf: 'center',
+    fontSize: 20,
+    fontWeight: 'bold'
   },
-  delete: {
-    flex: 1,
-    backgroundColor: 'thistle'
+  image: {
+    alignSelf: 'center',
+    height: 20,
+    width: 20
+  },
+  text: {
+    color: '#00000099'
   }
 
 }
